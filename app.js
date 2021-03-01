@@ -6,55 +6,75 @@ Build all of your functions for displaying and gathering information below (GUI)
 // app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  let searchResults;
+  let searchResults = people;
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchType = promptFor("Do you know the gender of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      switch(searchType){
-        case 'yes':
-          searchResults = searchByGender(people);
-          break;
-        case 'no':
-          searchType = promptFor("Do you know the date of birth of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-          switch(searchType){
-            case 'yes':
-              searchResults = searchByDateOfBirth(people);
-              break;
-            case 'no':
-              searchType = promptFor("Do you know the height of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-              switch(searchType){
-                case 'yes':
-                  searchResults = searchByHeight(people);
-                  break;
-                case 'no':
-                  searchType = promptFor("Do you know the weight of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-                  switch(searchType){
-                    case 'yes':
-                      searchResults = searchByWeight(people);
-                      break;
-                    case 'no':
-                      searchType = promptFor("Do you know the eye color of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-                      switch(searchType){
-                        case 'yes':
-                          searchResults = searchByEyeColor(people);
-                          break;
-                        case 'no':
-                          searchType = promptFor("Do you know the occupation of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-                          switch(searchType){
-                            case 'yes':
-                              searchResults = searchByOccupation(people);
-                              break;
-                            case 'no':
-      }}}}}}
+  }
+  searchType = promptFor("Do you know the gender of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  switch(searchType){
+    case 'yes':
+      searchResults = searchByGender(searchResults);
+      let moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      if(moreInfo === "no"){
+        break;
+      }
+    case 'no':
+  
+  searchType = promptFor("Do you know the date of birth of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  switch(searchType){
+    case 'yes':
+      searchResults = searchByDateOfBirth(searchResults);
+      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      if(moreInfo === "no"){
+        break;
+      }
+    case 'no':
+    
+  searchType = promptFor("Do you know the height of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  switch(searchType){
+    case 'yes':
+      searchResults = searchByHeight(searchResults);
+      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      if(moreInfo === "no"){
+        break;
+      }
+    case 'no':
+    
+  searchType = promptFor("Do you know the weight of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  switch(searchType){
+    case 'yes':
+      searchResults = searchByWeight(searchResults);
+      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      if(moreInfo === "no"){
+        break;
+      }
+    case 'no':
+    
+  searchType = promptFor("Do you know the eye color of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  switch(searchType){
+    case 'yes':
+      searchResults = searchByEyeColor(searchResults);
+      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      if(moreInfo === "no"){
+        break;
+      }
+    case 'no':
+    
+  searchType = promptFor("Do you know the occupation of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  switch(searchType){
+    case 'yes':
+      searchResults = searchByOccupation(searchResults);
+      break;
+    case 'no':
       // TODO: search by traits
       break;
       default:
     app(people); // restart app
       break;
-  }
+  }}}}}}
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
@@ -106,6 +126,34 @@ function searchByName(people){
   })
   // TODO: find the person using the name they entered
   return foundPerson[0];
+}
+
+function searchByGender(people){
+  let gender = promptFor("What is the person's gender?", chars).toLowerCase();
+
+  let filterByGender = people.filter(function(person){
+    if(person.gender === gender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByGender;
+}
+
+function searchByDateOfBirth(people){
+  let dateOfBirth = promptFor("What is the person's date of birth? (MM/DD/YYYY)", chars);
+
+  let filterByDateOfBirth = people.filter(function(person){
+    if(person.dateOfBirth === dateOfBirth){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByDateOfBirth;
 }
 
 // alerts a list of people
