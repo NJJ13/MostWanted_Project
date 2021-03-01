@@ -237,6 +237,20 @@ function searchByDateOfBirth(people){
   return filterByDateOfBirth;
 }
 
+function searchByHeight(people){
+  let height = promptFor("What is the person's height in inches?", chars)
+
+  let filterByHeight = people.filter(function(person){
+    if(person.height === height){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByHeight;
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
