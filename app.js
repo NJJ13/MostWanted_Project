@@ -245,7 +245,7 @@ function searchByDateOfBirth(people){
 }
 
 function searchByEyeColor(people){
-  let eyeColor = promptFor("What is the person's occupation?", chars).toLowerCase;
+  let eyeColor = promptFor("What is the person's occupation?", chars).toLowerCase();
   
   let filterByEyeColor = people.filter(function(people){
     if(person.eyeColor === eyeColor){
@@ -259,7 +259,7 @@ function searchByEyeColor(people){
 }
 
 function searchByOccupation(people){
-  let occupation = promptFor("What is the person's occupation?", chars).toLowerCase;
+  let occupation = promptFor("What is the person's occupation?", chars).toLowerCase();
   
   let filterByOccupation = people.filter(function(person){
     if(person.occupation === occupation){
@@ -284,6 +284,19 @@ function searchByHeight(people){
     }
   })
   return filterByHeight;
+}
+function searchByWeight(people){
+  let weight = promptFor("What is the person's weight in pounds?", chars)
+
+  let filterByWeight = people.filter(function(person){
+    if(person.weight === weight){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByWeight;
 }
 
 // alerts a list of people
