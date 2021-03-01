@@ -12,6 +12,43 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+      searchType = promptFor("Do you know the gender of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      switch(searchType){
+        case 'yes':
+          searchResults = searchByGender(people);
+          break;
+        case 'no':
+          searchType = promptFor("Do you know the date of birth of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+          switch(searchType){
+            case 'yes':
+              searchResults = searchByDateOfBirth(people);
+              break;
+            case 'no':
+              searchType = promptFor("Do you know the height of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+              switch(searchType){
+                case 'yes':
+                  searchResults = searchByHeight(people);
+                  break;
+                case 'no':
+                  searchType = promptFor("Do you know the weight of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+                  switch(searchType){
+                    case 'yes':
+                      searchResults = searchByWeight(people);
+                      break;
+                    case 'no':
+                      searchType = promptFor("Do you know the eye color of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+                      switch(searchType){
+                        case 'yes':
+                          searchResults = searchByEyeColor(people);
+                          break;
+                        case 'no':
+                          searchType = promptFor("Do you know the occupation of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+                          switch(searchType){
+                            case 'yes':
+                              searchResults = searchByOccupation(people);
+                              break;
+                            case 'no':
+      }}}}}}
       // TODO: search by traits
       break;
       default:
