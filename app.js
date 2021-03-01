@@ -75,9 +75,13 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
+    var family = []
+    Family(person, people, family);
+    DisplayFamilyMembers(family);
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -91,7 +95,84 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
-
+function Family(person, people, family){
+  Siblings(person, people, family)
+  Parents(person, people, family)
+  Spouce(person, people, family)
+  return family;
+}
+function Siblings(person, people, family){
+  let siblings;
+  if(person.parents != null){
+    for(let i = 0; i < person.parents.length; i++ ){
+      siblings = people.filter(function(el){
+        if(el.parents.includes(person.parents[i]) && el.id !== person.id){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+    }
+  }
+  if(siblings != null){
+    for(let i = 0; i < siblings.length; i++){
+      siblings[i].relation = "Sibling";
+      family.push(siblings[i]);
+    }
+  }
+  return family;
+}
+function Parents(person, people, family){
+  let parents = [];
+  parents = people.filter(function(el){
+    if(person.parents != null){
+      if(person.parents.includes(el.id)){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  })
+  if(parents != null){
+    for(let i = 0; i < parents.length; i++){
+      parents[i].relation = "Parent";
+      family.push(parents[i]);
+    }
+  }
+  return family;
+}
+function Spouse(person, people, family){
+  let spouse;
+  spouse = people.filter(function(el){
+    if(person.currentSpouse != null){
+       if(person.currentSpouse == el.id){
+         return true;
+       }
+       else{
+         return false;
+       }
+    }
+  })
+  if(spouse != null){
+    for(let i = 0; i < spouse.length; i++){
+      spouse[i].relation = "Spouse";
+      family.push(spouse[i]);
+    }
+  }
+  return family;
+}
+function displayFamilyMembers(people){
+  if(people.length != 0){
+    alert(people.map(function(person){
+      return person.firstName + " " + person.lastName + ", " + person.relation;
+    }).join("\n"));
+  }
+  else{
+    alert("This person doesn't have an immediate family.");
+  }
+}
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
