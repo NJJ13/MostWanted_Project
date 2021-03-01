@@ -251,6 +251,20 @@ function searchByHeight(people){
   return filterByHeight;
 }
 
+function searchByWeight(people){
+  let weight = promptFor("What is the person's weight in pounds", chars)
+
+  let filterByWeight = people.filter(function(person){
+    if(person.weight === weight){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByWeight;
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
