@@ -244,7 +244,6 @@ function searchByDateOfBirth(people){
   return filterByDateOfBirth;
 }
 
-<<<<<<< HEAD
 function searchByEyeColor(people){
   let eyeColor = promptFor("What is the person's occupation?", chars).toLowerCase;
   
@@ -264,27 +263,29 @@ function searchByOccupation(people){
   
   let filterByOccupation = people.filter(function(person){
     if(person.occupation === occupation){
-=======
-function searchByHeight(people){
-  let height = promptFor("What is the person's height in inches?", chars)
-
-  let filterByHeight = people.filter(function(person){
-    if(person.height === height){
->>>>>>> 5f25e1e8a35f779d042a43a8549241fbd84e216c
       return true;
     }
     else{
       return false;
     }
   })
-<<<<<<< HEAD
   return filterByOccupation;
 }
-=======
+
+function searchByHeight(people){
+  let height = promptFor("What is the person's height in inches?", chars)
+
+  let filterByHeight = people.filter(function(person){
+    if(person.height === height){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
   return filterByHeight;
 }
 
->>>>>>> 5f25e1e8a35f779d042a43a8549241fbd84e216c
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
