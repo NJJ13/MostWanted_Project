@@ -75,6 +75,13 @@ function app(people){
     app(people); // restart app
       break;
   }}}}}}
+
+  if(searchResults.length > 1){
+    app(people);
+  }
+  else{
+    searchResults = searchResults[0];
+  }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
@@ -206,7 +213,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson[0];
+  return foundPerson;
 }
 
 function searchByGender(people){
@@ -237,6 +244,34 @@ function searchByDateOfBirth(people){
   return filterByDateOfBirth;
 }
 
+function searchByEyeColor(people){
+  let eyeColor = promptFor("What is the person's occupation?", chars).toLowerCase();
+  
+  let filterByEyeColor = people.filter(function(people){
+    if(person.eyeColor === eyeColor){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByEyeColor;
+}
+
+function searchByOccupation(people){
+  let occupation = promptFor("What is the person's occupation?", chars).toLowerCase();
+  
+  let filterByOccupation = people.filter(function(person){
+    if(person.occupation === occupation){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByOccupation;
+}
+
 function searchByHeight(people){
   let height = promptFor("What is the person's height in inches?", chars)
 
@@ -249,6 +284,19 @@ function searchByHeight(people){
     }
   })
   return filterByHeight;
+}
+function searchByWeight(people){
+  let weight = promptFor("What is the person's weight in pounds?", chars)
+
+  let filterByWeight = people.filter(function(person){
+    if(person.weight === weight){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return filterByWeight;
 }
 
 function searchByWeight(people){
