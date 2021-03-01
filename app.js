@@ -12,72 +12,24 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+  while(true){
+  searchResults = filterDetails(searchResults);
+  let moreInfo = promptFor("Do you have anymore information? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  if(moreInfo === "no"){
+    break;
   }
-  searchType = promptFor("Do you know the gender of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){
-    case 'yes':
-      searchResults = searchByGender(searchResults);
-      let moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      if(moreInfo === "no"){
-        break;
-      }
-    case 'no':
-  
-  searchType = promptFor("Do you know the date of birth of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){
-    case 'yes':
-      searchResults = searchByDateOfBirth(searchResults);
-      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      if(moreInfo === "no"){
-        break;
-      }
-    case 'no':
-    
-  searchType = promptFor("Do you know the height of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){
-    case 'yes':
-      searchResults = searchByHeight(searchResults);
-      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      if(moreInfo === "no"){
-        break;
-      }
-    case 'no':
-    
-  searchType = promptFor("Do you know the weight of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){
-    case 'yes':
-      searchResults = searchByWeight(searchResults);
-      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      if(moreInfo === "no"){
-        break;
-      }
-    case 'no':
-    
-  searchType = promptFor("Do you know the eye color of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){
-    case 'yes':
-      searchResults = searchByEyeColor(searchResults);
-      moreInfo = promptFor("Do you have more information on the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      if(moreInfo === "no"){
-        break;
-      }
-    case 'no':
-    
-  searchType = promptFor("Do you know the occupation of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){
-    case 'yes':
-      searchResults = searchByOccupation(searchResults);
-      break;
-    case 'no':
+  }
       // TODO: search by traits
       break;
       default:
     app(people); // restart app
       break;
-  }}}}}}
+  }
 
   if(searchResults.length > 1){
+    prompt("This search resulted in more than 1 result. Please try again.")
     app(people);
+    
   }
   else{
     searchResults = searchResults[0];
@@ -245,9 +197,9 @@ function searchByDateOfBirth(people){
 }
 
 function searchByEyeColor(people){
-  let eyeColor = promptFor("What is the person's occupation?", chars).toLowerCase();
+  let eyeColor = promptFor("What is the person's eye color?", chars).toLowerCase();
   
-  let filterByEyeColor = people.filter(function(people){
+  let filterByEyeColor = people.filter(function(person){
     if(person.eyeColor === eyeColor){
       return true;
     }
@@ -273,7 +225,7 @@ function searchByOccupation(people){
 }
 
 function searchByHeight(people){
-  let height = promptFor("What is the person's height in inches?", chars)
+  let height = parseInt(promptFor("What is the person's height in inches?", chars))
 
   let filterByHeight = people.filter(function(person){
     if(person.height === height){
@@ -286,7 +238,7 @@ function searchByHeight(people){
   return filterByHeight;
 }
 function searchByWeight(people){
-  let weight = promptFor("What is the person's weight in pounds?", chars)
+  let weight = parseInt(promptFor("What is the person's weight in pounds?", chars))
 
   let filterByWeight = people.filter(function(person){
     if(person.weight === weight){
@@ -339,4 +291,27 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+function filterDetails(searchResults){
+  let searchType = promptFor("What would you like to search by? Enter one : 'gender', 'date of birth', 'height', 'weight', 'eye color', 'occupation'", chars).toLowerCase();
+    if(searchType === "gender"){
+      searchResults = searchByGender(searchResults);
+    }
+    else if(searchType === "date of birth"){
+      searchResults = searchByDateOfBirth(searchResults);
+    }
+    else if(searchType == "height"){
+      searchResults = searchByHeight(searchResults);
+    }
+    else if(searchType == "weight"){
+      searchResults = searchByWeight(searchResults);
+    }
+    else if(searchType == "eye color"){
+      searchResults = searchByEyeColor(searchResults);
+    }
+    else if(searchType == "occupation"){
+      searchResults = searchByOccupation(searchResults);
+    }
+    return searchResults;
 }
