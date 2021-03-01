@@ -75,6 +75,13 @@ function app(people){
     app(people); // restart app
       break;
   }}}}}}
+
+  if(searchResults.length > 1){
+    app(people);
+  }
+  else{
+    searchResults = searchResults[0];
+  }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
@@ -125,7 +132,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson[0];
+  return foundPerson;
 }
 
 function searchByGender(people){
