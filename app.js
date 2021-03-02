@@ -186,7 +186,7 @@ function searchByDateOfBirth(people){
   let dateOfBirth = promptFor("What is the person's date of birth? (MM/DD/YYYY)", chars);
 
   let filterByDateOfBirth = people.filter(function(person){
-    if(person.dateOfBirth === dateOfBirth){
+    if(Date.parse(person.dob) === Date.parse(dateOfBirth)){ 
       return true;
     }
     else{
