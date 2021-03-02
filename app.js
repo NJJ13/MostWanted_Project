@@ -26,17 +26,32 @@ function app(people){
       break;
   }
 
-  if(searchResults.length != 1){
+  if(searchResults.length < 1){
     prompt("This search resulted in " + searchResults.length + " results. Please try again.")
-    app(people);
-    
+    let restart = promptFor("Search again? Enter 'yes' or 'no'", yesNo).toLowerCase();
+    if(restart === "yes"){
+      app(people);
+    }
+  }
+  else if (searchResults.length > 1){
+    prompt("This search resulted in " + searchResults.length + " results. Here are the people that match the criteria")
+    displayPeople(searchResults);
+    let restart = promptFor("Search again? Enter 'yes' or 'no'", yesNo).toLowerCase();
+    if(restart === "yes"){
+      let useSameResults = promptFor("Would you like to continue filtering the same results? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      if(useSameResults === "yes"){
+        app(searchResults)
+      }
+      else if(useSameResults === "no"){
+        app(people)
+      }
+    }
   }
   else{
     searchResults = searchResults[0];
+    // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+    mainMenu(searchResults, people);
   }
-  
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
 }
 
 // Menu function to call once you find who you are looking for
