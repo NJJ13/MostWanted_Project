@@ -211,7 +211,7 @@ function searchByName(people){
   let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if((person.firstName).toLowerCase() === (firstName).toLowerCase() && (person.lastName).toLowerCase() === (lastName).toLowerCase()){
       return true;
     }
     else{
@@ -223,7 +223,14 @@ function searchByName(people){
 }
 
 function searchByGender(people){
-  let gender = promptFor("What is the person's gender?", chars).toLowerCase();
+  let gender = promptFor("What is the person's gender? Enter 'm' or 'f': ", maleFemale).toLowerCase();
+
+  if(gender === "m"){
+    gender = "male";
+  }
+  if (gender === "f"){
+    gender = "female";
+  }
 
   let filterByGender = people.filter(function(person){
     if(person.gender === gender){
@@ -237,7 +244,7 @@ function searchByGender(people){
 }
 
 function searchByDateOfBirth(people){
-  let dateOfBirth = promptFor("What is the person's date of birth? (MM/DD/YYYY)", chars);
+  let dateOfBirth = promptFor("What is the person's date of birth? (MM/DD/YYYY)", isDate);
 
   let filterByDateOfBirth = people.filter(function(person){
     if(Date.parse(person.dob) === Date.parse(dateOfBirth)){ 
@@ -251,7 +258,7 @@ function searchByDateOfBirth(people){
 }
 
 function searchByEyeColor(people){
-  let eyeColor = promptFor("What is the person's eye color?", chars).toLowerCase();
+  let eyeColor = promptFor("What is the person's eye color? Enter 'blue', 'brown', 'green', 'hazel' or 'black':", chars).toLowerCase();
   
   let filterByEyeColor = people.filter(function(person){
     if(person.eyeColor === eyeColor){
@@ -279,7 +286,7 @@ function searchByOccupation(people){
 }
 
 function searchByHeight(people){
-  let height = parseInt(promptFor("What is the person's height in inches?", chars))
+  let height = parseInt(promptFor("What is the person's height in inches?", number))
 
   let filterByHeight = people.filter(function(person){
     if(person.height === height){
@@ -292,7 +299,8 @@ function searchByHeight(people){
   return filterByHeight;
 }
 function searchByWeight(people){
-  let weight = parseInt(promptFor("What is the person's weight in pounds?", chars))
+  let weight = parseInt(promptFor("What is the person's weight in pounds?", number))
+  console.log(weight);
 
   let filterByWeight = people.filter(function(person){
     if(person.weight === weight){
@@ -342,6 +350,19 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
+function maleFemale(input){
+  return input == "male" || input == "female" || input == "m" || input == "f";
+}
+
+function checkEyeColor(input){
+  return input == "brown" || input == "green" || input == "hazel" || input == "black" || input == "blue";
+}
+function number(input){
+  return !isNaN(parseInt(input));
+}
+function isDate(input){
+  return isNaN(input) && !isNaN(Date.parse(input));
+}
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
@@ -349,23 +370,27 @@ function chars(input){
 
 function filterDetails(searchResults){
   let searchType = promptFor("What would you like to search by? Enter one : 'gender', 'date of birth', 'height', 'weight', 'eye color', 'occupation'", chars).toLowerCase();
-    if(searchType === "gender"){
+
+  switch(searchType){
+    case "gender":
       searchResults = searchByGender(searchResults);
-    }
-    else if(searchType === "date of birth"){
+      return searchResults;
+    case "date of birth":
       searchResults = searchByDateOfBirth(searchResults);
-    }
-    else if(searchType == "height"){
+      return searchResults;
+    case "height":
       searchResults = searchByHeight(searchResults);
-    }
-    else if(searchType == "weight"){
+      return searchResults;
+    case "weight":
       searchResults = searchByWeight(searchResults);
-    }
-    else if(searchType == "eye color"){
+      return searchResults;
+    case "eye color":
       searchResults = searchByEyeColor(searchResults);
-    }
-    else if(searchType == "occupation"){
+      return searchResults;
+    case "occupation":
       searchResults = searchByOccupation(searchResults);
+      break;
+    default:
+      return filterDetails(searchResults);
     }
-    return searchResults;
 }
