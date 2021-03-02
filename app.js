@@ -26,8 +26,8 @@ function app(people){
       break;
   }
 
-  if(searchResults.length > 1){
-    prompt("This search resulted in more than 1 result. Please try again.")
+  if(searchResults.length != 1){
+    prompt("This search resulted in " + searchResults.length + " results. Please try again.")
     app(people);
     
   }
