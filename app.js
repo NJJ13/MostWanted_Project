@@ -78,6 +78,9 @@ function mainMenu(person, people){
     DisplayFamilyMembers(family);
     break;
     case "descendants":
+    var descendants = []
+    Descendants(person, people, descendants);
+    DisplayDescendants(descendants);
     // TODO: get person's descendants
     break;
     case "restart":
@@ -167,6 +170,42 @@ function DisplayFamilyMembers(people){
     alert("This person doesn't have an immediate family.");
   }
 }
+
+function Descendants(person, people, descendants){
+  let generation = people.filter(function(el){
+    if(el.parents.length > 0){
+      for (let index = 0; index < el.parents.length; index++){
+        if(person.id === el.parents[index]){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    }
+  })
+  for (let g = 0; g < generation.length; g++) {
+    descendants.push(generation[g])
+  }
+  if(generation.length > 0){
+    for(let i = 0; i < generation.length; i++){
+      Descendants(generation[i], people, descendants)
+    }
+    return descendants;
+  }  
+}
+
+function DisplayDescendants(descendants){
+  if(descendants.length != 0){
+    alert(descendants.map(function(person){
+      return person.firstName + " " + person.lastName;
+    }).join("\n"));
+  }
+  else{
+    alert("This person doesn't have descendants.");
+  }
+}
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
