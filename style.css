@@ -1,0 +1,12 @@
+.container{
+    background-image: url(BackGround.jpg);
+}
+body{
+    background-image: url(BackGround.jpg);
+    text-align: center;
+    vertical-align: text-bottom;
+}
+h1{
+    color: black; 
+    padding-bottom: 350px;
+}
