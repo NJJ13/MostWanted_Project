@@ -97,7 +97,7 @@ function Family(person, people, family){
 }
 function Siblings(person, people, family){
   let siblings;
-  if(person.parents != null){
+  if(person.parents.length > 0){
     for(let i = 0; i < person.parents.length; i++ ){
       siblings = people.filter(function(el){
         if(el.parents.includes(person.parents[i]) && el.id !== person.id){
@@ -120,7 +120,7 @@ function Siblings(person, people, family){
 function Parents(person, people, family){
   let parents = [];
   parents = people.filter(function(el){
-    if(person.parents != null){
+    if(person.parents.length > 0){
       if(person.parents.includes(el.id)){
         return true;
       }
@@ -157,7 +157,7 @@ function Spouse(person, people, family){
   }
   return family;
 }
-function displayFamilyMembers(people){
+function DisplayFamilyMembers(people){
   if(people.length != 0){
     alert(people.map(function(person){
       return person.firstName + " " + person.lastName + ", " + person.relation;
