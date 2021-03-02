@@ -92,7 +92,7 @@ function mainMenu(person, people){
 function Family(person, people, family){
   Siblings(person, people, family)
   Parents(person, people, family)
-  Spouce(person, people, family)
+  Spouse(person, people, family)
   return family;
 }
 function Siblings(person, people, family){
